@@ -22,5 +22,13 @@ public class UsuarioService {
     }
 
 
+    public void removeUsuarioFromGroup(Long id, String tipoGrupo) {
+        Usuario usuario = usuarioRepository.findById(id);
+        if (usuario != null && usuario.getTipoGrupo() == TipoGrupo.valueOf(tipoGrupo)) {
+            usuario.setTipoGrupo(null);
+            usuarioRepository.persist(usuario);
+        }
+    }
+
 
 }

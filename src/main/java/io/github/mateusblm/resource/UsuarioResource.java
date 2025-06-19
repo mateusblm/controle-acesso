@@ -6,10 +6,7 @@ import io.github.mateusblm.service.UsuarioService;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.*;
 
 @Path("usuarios")
 @RequestScoped
@@ -31,4 +28,12 @@ public class UsuarioResource {
     public Usuario listUsuariosByGrupo(@PathParam("tipoGrupo") String tipoGrupo) {
         return usuarioService.listUsuariosByGrupo(tipoGrupo);
     }
+
+    @DELETE
+    @Path("/remove/{id}/{tipoGrupo}")
+    @Transactional
+    public void removeUsuarioFromGroup(@PathParam("id") Long id, @PathParam("tipoGrupo") String tipoGrupo) {
+        usuarioService.removeUsuarioFromGroup(id, tipoGrupo);
+    }
+
 }
